@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <meta charset="UTF-8" />
+
+
+<?php include "includes/header.php"; ?>
+
 <head>
   <title> Order form -- RUSH Albums </title>
 <header>
@@ -12,7 +16,7 @@
 
 <body>
 <!--Build a form to place orders for albums-->
-<form action="#">
+<form action="purchase.php" method="post">
     <fieldset>
 	<legend><strong>Personal information</strong></legend>
 	 <table>
@@ -48,7 +52,7 @@
     <fieldset>
      <legend><strong>Product Order</strong></legend>
 
-      Album Selection:<br> <select multiple name="albumSelection">
+      Album Selection:<br> <select multiple name="albumSelection[]">
 			<option value="2112">2112 - 10.99</option>
 			<option value="presto">Presto - 10.99</option>
 			<option value="flybynight">Fly By Night - 10.99</option>
@@ -61,7 +65,10 @@
 			<option value="afarewelltokings">A Farewell to Kings - 10.99</option>
 		        <option value="signals">Signals - 10.99</option>
 			<option value="powerwindows">Power Windows - 10.99</option>
-		       </select>
+		       </select><br>
+
+     Comments:<br>
+	 <textarea name="comments"></textarea><br>
 
     </fieldset>
    
@@ -77,16 +84,17 @@
           Exp Date: <input type="date" name="expDate"><br>
 
     </fieldset><br>
-    <input type="submit" value="Submit">
+    <input type="submit" class="btn btn-success btn-lg" value="Submit">
   </fieldset>
 </form>
 
 
 
-
-
-<footer>
-
-</footer>
 </body>
+
+<?php 
+ include "includes/footer.php";
+?>
+
+
 </html>

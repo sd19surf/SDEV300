@@ -1,0 +1,50 @@
+html, body {
+  height: 100%;
+}
+
+main {
+  background-color: #1E0500;
+  margin-top: -82px;
+  padding-top: 80px;
+  min-height: 100%;
+  margin-bottom: -70px;  /* make equal to footer height */
+}
+
+main:after {
+  content: "";
+  display: block;
+}
+
+footer, main:after {
+  height: 70px;
+}
+
+footer {
+  background-color: #00586A
+}
+
+.navbar-default {
+    background-color: #00586A;
+    border-color: #FFFFFF;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #FAFFEF;
+    font-size: 20px;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: #E7E7E7;
+    color: #555555;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+#map {
+  background-color: gray;
+  height: 500px;
+}
+
+.label-md {
+  font-size: 14px;
+}
