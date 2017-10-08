@@ -6,7 +6,14 @@
     <meta name="subject" content="9/17/2017 FALL 2017 SDEV300">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<?php include "includes/header.php"; ?>
+<?php
+
+  include "includes/header.php";
+
+  // Normal development I place these in another file for ease of reading the html
+
+$rows = selectAllProducts();
+ ?>
 
 <head>
   <title> RUSH Albums</title>
@@ -36,26 +43,21 @@
 
 	<table border="1" padding="2">
 	<tr>
-	  <td><a href="./popups/signals.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/signals.jpg" width="150em" height="150em"><br>Signals - 10.99</a></td>
-	  <td><a href="./popups/2112.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/2112.jpg" width="150em" height="150em"><br>2112 - 10.99</a></td>
-          <td><a href="./popups/flybynight.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/flybynight.jpg" width="150em" height="150em"><br>Fly by Night - 10.99</a></td>
-          <td><a href="./popups/alltheworldsastage.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/alltheworldsastage.jpg" width="150em" height="150em"><br>All the World's a Stage - 10.99</a></td>
-          <td><a href="./popups/chronicles.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/chronicles.jpg" width="150em" height="150em"><br>Chronicles - 10.99</a></td>
-          <td><a href="./popups/exitstageleft.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/exitstageleft.png" width="150em" height="150em"><br>Exit Stage Left - 10.99</a></td>
+	<?php
+		$colCount = 0;
+		foreach ($rows as $row){
+		    if ($colCount % 6 != 0){
+			echo'<td><img src="'. $row['ProductPicture'] . '" width="150em" height="150em"><br>'. $row['ProductName'] .'-'. $row['ProductPrice'] .'</a></td>';
+		    }else{
+			echo'</tr><tr>';
+			echo'<td><img src="'. $row['ProductPicture'] . '" width="150em" height="150em"><br>'. $row['ProductName'] .'-'. $row['ProductPrice'] .'</a></td>';
+		    }
+		   $colCount++;
+		}
+
+	?>
 	</tr>
-	<tr>
-	  <td><a href="./popups/caressofsteel.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/caressofsteel.png" width="150em" height="150em"><br>Caress of Steel - 10.99</a></td>
-	  <td><a href="./popups/movingpictures.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/moving_pictures.jpg" width="150em" height="150em"><br>Moving Pictures - 10.99</a></td>
-          <td><a href="./popups/presto.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/presto.jpg" width="150em" height="150em"><br>Presto - 10.99</a></td>
-          <td><a href="./popups/testforecho.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/testforecho.jpg" width="150em" height="150em"><br>Test For Echo - 10.99</a></td>
-          <td><a href="./popups/afarewelltokings.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/farewelltokings.png" width="150em" height="150em"><br>A Farewell to Kings - 10.99</a></td>
-          <td><a href="./popups/powerwindows.html" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><img src="img/powerwindows.jpg" width="150em" height="150em"><br>Power Windows - 10.99</a></td>
-	</tr>
-
-
-
-
-
+	
 	</table>
 
   

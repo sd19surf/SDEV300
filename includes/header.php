@@ -29,12 +29,18 @@
         <!-- Links to the navbar, 'floated' left -->
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-	     <?php if(!empty($_SESSION['LoggedInTime']) && !empty($_SESSION['Username'])){
+	 <?php   
+           if(!empty($_SESSION['LoggedInTime']) && !empty($_SESSION['Username']) && $_SESSION['Username'] === 'sdev_owner'){
            echo ' <li><a href="./shopping.php">Shopping</a></li>';
            echo ' <li><a href="./order.php">Order Form</a></li>';
-		   } else {
+           echo ' <li><a href="./admin.php">Admin</a></li>';
+          } elseif (!empty($_SESSION['LoggedInTime']) && !empty($_SESSION['Username'])){
+           echo ' <li><a href="./shopping.php">Shopping</a></li>';
+           echo ' <li><a href="./order.php">Order Form</a></li>';
 
-		   }
+           }else {
+
+            }
 	      ?>
 
           </ul>

