@@ -26,6 +26,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
 	  $_SESSION['Username'] = $username;
 	  $_SESSION['EmailAddress'] = $email;
 	  $_SESSION['LoggedInTime'] = time();
+	  $_SESSION['Password'] = $password;
 
 		header("Location: shopping.php");
 	

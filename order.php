@@ -2,7 +2,12 @@
 <meta charset="UTF-8" />
 
 
-<?php include "includes/header.php"; ?>
+<?php include "includes/header.php";
+// add the information for the drop down
+
+$rows = selectAllProducts();
+
+ ?>
 
 <head>
   <title> Order form -- RUSH Albums </title>
@@ -53,18 +58,13 @@
      <legend><strong>Product Order</strong></legend>
 
       Album Selection:<br> <select multiple name="albumSelection[]">
-			<option value="2112">2112 - 10.99</option>
-			<option value="presto">Presto - 10.99</option>
-			<option value="flybynight">Fly By Night - 10.99</option>
-			<option value="alltheworldsastage">All the World's a Stage - 10.99</option>
-			<option value="chronicles">Chronicles - 10.99</option>
-			<option value="exitstageleft">Exit Stage Left - 10.99</option>
-			<option value="caressofsteel">Caress of Steel - 10.99</option>
-			<option value="movingpictures">Moving Pictures - 10.99</option>
-			<option value="testforecho">Test For Echo - 10.99</option>
-			<option value="afarewelltokings">A Farewell to Kings - 10.99</option>
-		        <option value="signals">Signals - 10.99</option>
-			<option value="powerwindows">Power Windows - 10.99</option>
+             <?php
+		foreach ($rows as $row){
+			echo'<option value="'.$row['ProductName'].'">'.$row['ProductName'].'-'. $row['ProductPrice'] .'</option>';
+
+		}
+              ?>
+			
 		       </select><br>
 
      Comments:<br>

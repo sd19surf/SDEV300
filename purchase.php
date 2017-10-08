@@ -2,23 +2,12 @@
 
 include "includes/header.php";
 
-
-
-$total = 0;
-
-$_SESSION['purchases'] = $_POST["albumSelection"];
-
-echo "Name: ".$_POST["firstname"]." ".$_POST["lastname"]."<br>";
-echo "Email: ".$_SESSION["EmailAddress"]."<br>";
-echo "List of Purchase Items:"."<br>";
-foreach($_SESSION['purchases'] as $value){
- echo $value ." $10.99"."<br>";
- $total++;
-}
-
+$result = updatePurchaseAndUser();
+			
+print_r($result);
 ?>
 
-<p> Total Price: <?=$total*10.99?> </p>
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal">Purchase</button>
 

@@ -6,6 +6,8 @@
     <meta name="subject" content="10/08/2017 FALL 2017 SDEV300">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+
 <?php  include "includes/header.php"; 
 
 if ($_SESSION['Username'] == 'sdev_owner'){
@@ -25,7 +27,7 @@ echo '</tr>';
 
 
 		foreach ($rows as $row){
-			echo'<tr><td>'.$row['ProductName'].'</td><td>'. $row['ProductPrice'] .'</td><td><img src="'.$row['ProductPicture'].'" width="150em" height="150em"></td><td><a href="delete.php?id='.$row['ProductID'].'" class="btn btn-danger" role="button">Delete</a></td><td><button class="btn btn-success">Update</button></td></tr>';
+			echo'<tr><td>'.$row['ProductName'].'</td><td>'. $row['ProductPrice'] .'</td><td><img src="'.$row['ProductPicture'].'" width="150em" height="150em"></td><td><a href="delete.php?id='.$row['ProductID'].'" class="btn btn-danger" role="button">Delete</a></td><td><a class="btn btn-primary" role="button" href="update.php?id='.$row['ProductID'].'">Update</a></tr>';
 
 		}
 
@@ -84,6 +86,8 @@ echo '<button class="btn btn-info" data-toggle="modal" data-target="#addProductM
 
  </div>
 </div>
+
+
 
 
 

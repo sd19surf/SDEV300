@@ -18,12 +18,21 @@ DROP TABLE Purchase;
 -- Create the Tables
 
 CREATE TABLE User(
-CustomerID int primary key,
- 
+CustomerID int primary key, 
 Username varchar(30),
 Password varchar(32),
-Email varchar (50)
+Email varchar (50),
+FirstName varchar(30),
+LastName varchar(30),
+StreetAddress varchar(100),
+City varchar (45),
+State varchar (52),
+Zipcode varchar (10),
+CreditCardNumber varchar (32),
+CreditCardDate date
 );
+
+
 
 CREATE TABLE Purchase(
 CustomerID int,
@@ -58,7 +67,7 @@ INSERT INTO product VALUES('12','Power Windows','img/powerwindows.jpg','',10.99)
 -- Need the admin account setup for the instructor
 -- password is sdev300
 -- no salt for hash
-INSERT INTO user VALUES('1','sdev_owner','07ae2b939047208ccd4504fb612d317e','sdev@gmail.com');
+INSERT INTO user (CustomerID,Username,Password,Email) VALUES('1','sdev_owner','07ae2b939047208ccd4504fb612d317e','sdev@gmail.com');
 
 
 

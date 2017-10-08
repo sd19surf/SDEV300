@@ -30,6 +30,118 @@ function selectAllProducts() {
 
 }
 
+function selectProductsByID($idNumber) {
+
+      $productid = stripslashes($idNumber);
+
+      $sql = "SELECT ProductID,ProductName,ProductPrice,ProductPicture FROM Product WHERE ProductID = '$productid'";
+
+      $mysqli = connectdb();
+
+      if ($result = $mysqli->query($sql)){
+         
+	    $r = $result->fetch_assoc();
+            
+       }
+       $close = $mysqli->close();
+
+    return $r;
+                     
+
+}
+
+// Checks user and sets CustomerID and creates one if not in database.
+
+function updatePurchaseAndUser(){
+
+
+        $username = $_SESSION['Username'];
+        $email = $_SESSION['EmailAddress'];
+	$password = $_SESSION['Password'];
+
+	$firstname = $_POST['firstname'];
+	$lastname = $_POST['lastname'];
+	$streetaddress = $_POST['address'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $zipcode = $_POST['zipcode'];
+
+
+  // check if there is an id created if not make one
+   $mysqli = connectdb();
+   $customerid = 0;
+   $sql = "SELECT CustomerID from user WHERE Username = '$username'";
+   if ($result = $mysqli->query($sql)){
+       $custid = $result->fetch_assoc();
+   }
+
+
+   if ($custid['CustomerID'] != 0){
+       $customerid = $custid['CustomerID'];
+   }else{
+	$sql = "SELECT MAX(CustomerID) As NewId from user";
+   	   if ($result = $mysqli->query($sql)){
+      		 $custid = $result->fetch_assoc();
+		 $customerid = $custid['NewId'] + 1;
+		 
+	   }
+     
+   }	
+
+
+
+  // after making an id use the form data to load into the database
+
+    $insertTheUserData = insertUser($username, $email, $customerid, $password, $firstname, $lastname, $streetaddress, $city, $state, $zipcode);
+
+    $insertThePurchase = insertPurchase($customerid);
+
+   $close = $mysqli->close();
+}
+
+
+function insertUser($username, $email, $customerid, $password, $firstname, $lastname, $streetaddress, $city, $state, $zipcode){
+
+
+    $sql = "INSERT INTO user (Username, Email, CustomerID, Password, FirstName, LastName, StreetAddress, City, State, Zipcode) VALUES ('$username', '$email', '$customerid', '$password', '$firstname', '$lastname', '$streetaddress', '$city', '$state', '$zipcode')";
+   
+    $mysqli = connectdb();
+   
+    $success = "false";
+
+      if ($result = $mysqli->query($sql)){
+         
+	   $success = "true";
+      }
+       $close = $mysqli->close();
+    
+     return $success;
+ }
+
+
+
+function insertPurchase($customerid) {
+
+   $mysqli = connectdb();
+
+    $allitems = $mysqli->real_escape_string(serialize($_POST["albumSelection"]));
+     // decided against total cost since it's not in the requirements
+ 
+    
+    $sql = "INSERT INTO purchase (CustomerID, AllItems, PurchaseDate) VALUES ('$customerid','$allitems','CURDATE()')";
+   
+   
+    $success = "false";
+
+      if ($result = $mysqli->query($sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error(), E_USER_ERROR)){
+         
+	   $success = "true";
+      }
+       $close = $mysqli->close();
+       return $success;
+}
+
+
 // Grabs the highest Product ID number
 
 function selectMaxProdIdNumber() {
@@ -119,6 +231,28 @@ function deleteProduct($product){
 
 function updateProduct($product){
 
+    $productid = $product->getProductid();
+    $productname = $product->getProductname();
+    //$productpicture = $product->getProductpicture(); not updating the picture owner can add new product instead
+    $productprice = $product->getProductprice();
+
+
+    $sql = "UPDATE product
+            SET ProductName = '$productname',
+		ProductPrice = '$productprice'
+            WHERE ProductID = $productid";
+   
+    $mysqli = connectdb();
+   
+    $success = "false";
+
+      if ($result = $mysqli->query($sql)){
+         
+	   $success = "true";
+      }
+       $close = $mysqli->close();
+       echo $success;
+
 }
 
 // connects to the database
@@ -193,10 +327,10 @@ class PurchaseClass {
 
          // Constructor
      public function __construct($CustomerID,$AllItems,$TotalCost,$PurchaseDate)     { 
-      $this->productid = $CustomerID;
-       $this->productname = $AllItems;
-       $this->productpicture = $TotalCost;
-       $this->productprice = $PurchaseDate;
+      $this->customerid = $CustomerID;
+       $this->allitems = $AllItems;
+       $this->totalcost = $TotalCost;
+       $this->purchasedate = $PurchaseDate;
       }
           // Get methods
      public function getCustomerId (){
@@ -227,7 +361,120 @@ class PurchaseClass {
      }           
   } // End Productclass
 
+ // Class to construct Users with getters/setter
+class UserClass {
+     // property declaration
+     private $CustomerID="";
+     private $Username="";
+     private $Password="";
+     private $Email="";
+     private $FirstName="";
+     private $LastName="";
+     private $StreetAddress="";
+     private $City="";
+     private $State="";
+     private $Zipcode="";
+     private $CreditCardNumber="";
+     private $CreditCardDate="";
 
+	// Partial Constructor for username and setting ids
+
+
+         // Full Constructor
+     public function __construct($CustomerID,$Username,$Password,$Email,$FirstName,$LastName,$StreetAddress,$City,$State,$Zipcode,$CreditCardNumber,$CreditCardDate)     { 
+	$this->customerid = $CustomerID;
+	$this->username = $Username;
+	$this->password = $Password;
+	$this->email = $Email;
+	$this->firstname = $FirstName;
+	$this->lastname = $Lastname;
+	$this->streetaddress = $StreetAddress;
+	$this->city = $City;
+	$this->state = $State;
+	$this->zipcode = $Zipcode;
+	$this->creditcardnumber = $CreditCardNumber;
+	$this->creditcarddate = $CreditCardDate;
+
+
+      }
+          // Get methods
+	public function getCustomerId (){
+	  return $this->customerid;     
+	}     
+	public function getUsername (){ 
+	  return $this->username;
+	} 
+	public function getPassword (){ 
+	  return $this->password;
+	} 
+	public function getEmail (){ 
+	  return $this->email;
+	}  
+	public function getFirstname (){
+	  return $this->firstname;
+        }
+	public function getLastname (){
+	  return $this->lastname;
+	}
+	public function getStreetaddress() {
+	  return $this->streetaddress;
+	}
+	public function getCity () {
+	  return $this->city;
+	}
+	public function getState () {
+	  return $this->state;
+	}
+	public function getZipcode () {
+	  return $this->zipcode;
+	}
+	public function getCreditcardnumber () {
+	  return $this->creditcardnumber;
+	}
+	public function getCreditcarddate () {
+	  return $this->creditcarddate;
+	} 
+ 
+    // Set methods
+	public function setCustomerID ($value){ 
+	  $this->customerid = $value;
+	} 
+	public function setUsername($value){ 
+	  $this->username = $value;
+	}
+	public function setPassword ($value){
+	  $this->password = $value; 
+	}    
+	public function setEmail ($value){  
+	  $this->email = $value; 
+	}
+	public function setFirstname ($value){ 
+	  $this->firstname = $value;
+	} 
+	public function setLastname($value){ 
+	  $this->lastname = $value;
+	}
+	public function setStreetaddress ($value){
+	  $this->streetaddress = $value; 
+	}    
+	public function setCity ($value){  
+	  $this->City = $value; 
+	}
+	public function setState ($value){ 
+	  $this->state = $value;
+	} 
+	public function setZipcode($value){ 
+	  $this->zipcode = $value;
+	}
+	public function setCreditcardnumber ($value){
+	  $this->creditcardnumber = $value; 
+	}    
+	public function setCreditcarddate ($value){  
+	  $this->creditcarddate = $value; 
+	}
+
+        
+  } // End Userclass
 
 
 

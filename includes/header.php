@@ -32,7 +32,6 @@
 	 <?php   
            if(!empty($_SESSION['LoggedInTime']) && !empty($_SESSION['Username']) && $_SESSION['Username'] === 'sdev_owner'){
            echo ' <li><a href="./shopping.php">Shopping</a></li>';
-           echo ' <li><a href="./order.php">Order Form</a></li>';
            echo ' <li><a href="./admin.php">Admin</a></li>';
           } elseif (!empty($_SESSION['LoggedInTime']) && !empty($_SESSION['Username'])){
            echo ' <li><a href="./shopping.php">Shopping</a></li>';
