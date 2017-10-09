@@ -51,9 +51,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
 		<div class="col-md-6 col-md-offset-3 text-center">
 			<h1>Member Login</h1>
 			<br>
-			<p>Thanks for visiting!
-				<!--<a href="./newuser.php">click here to register</a>.-->
-			</p>
+			<p>Thanks for visiting!</p>
 		</div>
 	</div>
 
@@ -68,6 +66,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
             type="text"
             class="form-control"
             id="username"
+	    autocomplete="off"
             placeholder="Enter your username here"
             name="username" />
 				</div>
@@ -77,6 +76,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
             type="password"
             class="form-control"
             id="password"
+            autocomplete="off"
             placeholder="Enter your password here"
             name="password" />
 
@@ -86,6 +86,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
             type="email"
             class="form-control"
             id="email"
+            autocomplete="off"
             placeholder="Enter your email here"
             name="email" />
 
