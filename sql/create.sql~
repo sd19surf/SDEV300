@@ -10,14 +10,14 @@ CREATE DATABASE SDEV_STORE;
 
 use SDEV_STORE;
 
-DROP TABLE user;
-DROP TABLE product;
-DROP TABLE purchase;
+DROP TABLE User;
+DROP TABLE Product;
+DROP TABLE Purchase;
 
 
 -- Create the Tables
 
-CREATE TABLE user(
+CREATE TABLE User(
 CustomerID int primary key, 
 Username varchar(30),
 Password varchar(32),
@@ -34,14 +34,14 @@ CreditCardDate date
 
 
 
-CREATE TABLE purchase(
+CREATE TABLE Purchase(
 CustomerID int,
 AllItems MEDIUMBLOB,
 TotalCost float,
 PurchaseDate date
 );
 
-CREATE TABLE product(
+CREATE TABLE Product(
 ProductID int primary key,
 ProductName varchar (30),
 ProductPicture varchar (1000),

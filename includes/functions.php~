@@ -190,7 +190,7 @@ function vaildateProduct($type){
 }
 
 function insertProduct($product){
-    echo "tes";
+
     $productid = $product->getProductid();
     $productname = $product->getProductname();
     $productpicture = $product->getProductpicture();
