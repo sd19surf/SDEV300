@@ -8,6 +8,7 @@
     <!-- Using CDN for now - can include local files later or scrap bootstrap altogether -->
     <script src="./scripts/jquery-3.2.1.min.js"></script>
     <script src="./scripts/bootstrap.min.js"></script>
+    <script src="./scripts/md5.js"></script>
     <link rel="stylesheet" href="./styles/bootstrap.min.css">
     <link rel="stylesheet" href="./styles/stylesheet.css">
 

@@ -2,7 +2,13 @@
  	$page_title = "Login";  # changes some of <title> in header.php to 'Login'
 	include "includes/header.php"
 ?>
-
+<script>
+ function hashIt(item){
+ if (document.getElementById("password").value != ''){
+   document.getElementById("password").value = md5(item);
+ }
+}
+</script>
 <main>
 
 <?php
@@ -13,7 +19,7 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
 } elseif(!empty($_POST['username']) && !empty($_POST['password']))
 {
 	$username = $_POST['username'];
-	$password = md5($_POST['password']); //funny my password isn't MD5 in the db ha ha ha
+	$password = $_POST['password']; 
 	$email = $_POST['email'];
 
       // temporary until there is a database to compare the password to
@@ -78,7 +84,8 @@ if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username']))
             id="password"
             autocomplete="off"
             placeholder="Enter your password here"
-            name="password" />
+            name="password" 
+	    onchange="hashIt(this.value)"/>
 
 				<div class="form-group">
 					<label for="email">Email</label>
